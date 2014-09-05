@@ -6,9 +6,18 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-%w(ruby ruby-dev build-essential libssl-dev).each do |p|
-  package p do
-    action :upgrade
+case node["platform_family"]
+when "rhel"
+  %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel).each do |p|
+    package p do
+      action :upgrade
+    end
+  end
+when "debian"
+  %w(ruby ruby-dev build-essential libssl-dev).each do |p|
+    package p do
+      action :upgrade
+    end
   end
 end
 
