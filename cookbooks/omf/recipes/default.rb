@@ -20,6 +20,10 @@ bash "install_omf_rc_start_script" do
   code "install_omf_rc -i"
 end
 
+template "/etc/omf_rc/config.yml" do
+  source "config.yml"
+end
+
 service "omf_rc" do
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
   action [:start, :enable]

@@ -1,0 +1,8 @@
+environment: production
+
+communication:
+  url: amqp://srv.mytestbed.net
+
+  resources:
+  - type: node
+    uid: <%= Socket.gethostname %>
