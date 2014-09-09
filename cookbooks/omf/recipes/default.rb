@@ -6,6 +6,8 @@
 #
 # All rights reserved - Do Not Redistribute
 case node["platform_family"]
+when "rhel"
+  pkg_list = %w(centos-release-SCL ruby193 ruby193-ruby-devel make gcc gpp gcc-c++ openssl-devel)
 when "debian"
   include_recipe "apt"
 
@@ -20,7 +22,6 @@ when "fedora"
   magic_shell_environment "PATH" do
     value "$PATH:/usr/local/bin"
   end
-
   pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
 end
 
@@ -28,6 +29,11 @@ pkg_list.each do |p|
   package p do
     action :upgrade
   end
+end
+
+execute "ruby_on_centos" do
+  command "echo \"source /opt/rh/ruby193/enable\" | sudo tee -a /etc/profile.d/ruby193.sh"
+  only_if { platform?("centos") }
 end
 
 gem_package "omf_rc" do
