@@ -19,6 +19,12 @@ when "debian"
       action :upgrade
     end
   end
+when "fedora"
+  %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel).each do |p|
+    package p do
+      action :upgrade
+    end
+  end
 end
 
 gem_package "omf_rc" do
