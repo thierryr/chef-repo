@@ -10,5 +10,5 @@ tar xzf chef-repo.tar.gz
 rm -r chef-repo.tar.gz chef-repo 2>/dev/null
 mv chef-repo-master chef-repo
 
-cd chef-repo && chef-solo -c solo/solo.rb -j solo/solo.json && cd ..
+cd chef-repo && FRCP=$1 chef-solo -c solo/solo.rb -j solo/solo.json && cd ..
 rm -rf chef-repo
