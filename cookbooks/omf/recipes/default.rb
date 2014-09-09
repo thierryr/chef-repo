@@ -20,7 +20,7 @@ when "debian"
     end
   end
 when "fedora"
-  magic_shell_enviromnet "PATH" do
+  magic_shell_environment "PATH" do
     value "$PATH:/usr/local/bin"
   end
 
