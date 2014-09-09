@@ -5,9 +5,10 @@
 # Copyright 2014, YOUR_COMPANY_NAME
 #
 # All rights reserved - Do Not Redistribute
-#
 case node["platform_family"]
 when "debian"
+  include_recipe "apt"
+
   pkg_list = %w(build-essential libssl-dev)
 
   if (platform?("debian") && node["platform_version"] < "7") || (platform?("ubuntu") && node["platform_version"] < "13.04")
