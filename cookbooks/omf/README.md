@@ -8,9 +8,9 @@ Requirements
 #### platform
 
 - Ubuntu 14.04
-
+- Ubuntu 12.04
 - Debian 7
-
+- Debian 6
 - Fedora 20
 
 TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
