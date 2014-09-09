@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 case node["platform_family"]
 when "rhel"
-  pkg_list = %w(centos-release-SCL ruby193 ruby193-ruby-devel make gcc gpp gcc-c++ openssl-devel)
+  pkg_list = %w(centos-release-SCL ruby193 ruby193-ruby-devel make gcc gcc-c++ openssl-devel)
 when "debian"
   include_recipe "apt"
 
