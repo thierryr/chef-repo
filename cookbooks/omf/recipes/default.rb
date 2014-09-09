@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 case node["platform_family"]
-when "rhel"
-  pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
 when "debian"
   pkg_list = %w(build-essential libssl-dev)
 
