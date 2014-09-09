@@ -20,6 +20,10 @@ when "debian"
     end
   end
 when "fedora"
+  magic_shell_enviromnet "PATH" do
+    value "$PATH:/usr/local/bin"
+  end
+
   %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel).each do |p|
     package p do
       action :upgrade
@@ -43,5 +47,5 @@ end
 
 service "omf_rc" do
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
-  action [:start, :enable]
+  action [:stop, :start, :enable]
 end
