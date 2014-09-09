@@ -8,26 +8,26 @@
 #
 case node["platform_family"]
 when "rhel"
-  %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel).each do |p|
-    package p do
-      action :upgrade
-    end
-  end
+  pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
 when "debian"
-  %w(ruby ruby-dev build-essential libssl-dev).each do |p|
-    package p do
-      action :upgrade
-    end
+  pkg_list = %w(build-essential libssl-dev)
+
+  if (platform?("debian") && node["platform_version"] < "7") || (platform?("ubuntu") && node["platform_version"] < "13.04")
+    pkg_list += %w(ruby1.9.1 ruby1.9.1-dev)
+  else
+    pkg_list += %w(ruby ruby-dev)
   end
 when "fedora"
   magic_shell_environment "PATH" do
     value "$PATH:/usr/local/bin"
   end
 
-  %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel).each do |p|
-    package p do
-      action :upgrade
-    end
+  pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
+end
+
+pkg_list.each do |p|
+  package p do
+    action :upgrade
   end
 end
 
@@ -46,6 +46,6 @@ template "/etc/omf_rc/config.yml" do
 end
 
 service "omf_rc" do
-  provider Chef::Provider::Service::Upstart if platform?('ubuntu')
+  provider Chef::Provider::Service::Upstart if platform?("ubuntu")
   action [:stop, :start, :enable]
 end
