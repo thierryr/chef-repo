@@ -28,7 +28,7 @@ when "fedora"
 end
 
 gem_package "omf_rc" do
-  action :upgrade
+  action [:remove, :install]
 end
 
 bash "install_omf_rc_start_script" do
