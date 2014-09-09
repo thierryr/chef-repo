@@ -1,17 +1,24 @@
 omf Cookbook
 ============
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Bootstrap vanilla environment with OMF RC installation
 
 Requirements
 ------------
+
+#### platform
+
+- Ubuntu 14.04
+
+- Debian 7
+
+- Fedora 20
+
 TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
 e.g.
 #### packages
 - `toaster` - omf needs toaster to brown your bagel.
+
 
 Attributes
 ----------
