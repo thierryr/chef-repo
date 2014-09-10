@@ -18,6 +18,16 @@ when "debian"
   else
     pkg_list += %w(ruby ruby-dev)
   end
+
+  if platform?("debian")
+  elsif platform?("ubuntu")
+    apt_repository 'oml' do
+      key "http://download.opensuse.org/repositories/home:cdwertmann:oml/xUbuntu_#{node["platform_version"]}/Release.key"
+      uri  "http://download.opensuse.org/repositories/home:/cdwertmann:/oml/xUbuntu_#{node["platform_version"]}/"
+      components ['/']
+    end
+  end
+  pkg_list << "oml2-apps"
 when "fedora"
   magic_shell_environment "PATH" do
     value "$PATH:/usr/local/bin"
@@ -54,3 +64,4 @@ service "omf_rc" do
   provider Chef::Provider::Service::Upstart if platform?("ubuntu")
   action [:stop, :start, :enable]
 end
+
