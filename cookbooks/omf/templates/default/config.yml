@@ -1,7 +1,7 @@
 environment: production
 
 communication:
-  url: <%= ENV["FRCP"] || "amqp://srv.mytestbed.net" %>
+  url: <%= ENV["FRCP"] && !ENV["FRCP"].empty? ? ENV["FRCP"] : "amqp://srv.mytestbed.net" %>
 
   resources:
   - type: node
