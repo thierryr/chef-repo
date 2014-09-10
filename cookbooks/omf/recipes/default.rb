@@ -32,7 +32,7 @@ pkg_list.each do |p|
 end
 
 execute "ruby_on_centos" do
-  command "echo \"source /opt/rh/ruby193/enable\" | sudo tee -a /etc/profile.d/ruby193.sh"
+  command "source /opt/rh/ruby193/enable && echo \"source /opt/rh/ruby193/enable\" | sudo tee -a /etc/profile.d/ruby193.sh"
   only_if { platform?("centos") }
 end
 
