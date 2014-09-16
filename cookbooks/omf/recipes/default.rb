@@ -35,6 +35,17 @@ when "fedora"
     value "$PATH:/usr/local/bin"
   end
   pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
+  if node["platform_version"] < 17
+  else
+    o_url = "http://download.opensuse.org/repositories/home:cdwertmann:oml/Fedora_#{node["platform_version"]}/home:cdwertmann:oml.repo"
+  end
+
+  yum_repository 'oml' do
+    desciption "OML packages"
+    baseurl o_url
+    gpgcheck false
+    action :create
+  end
 when "rhel"
   # FIXME Failed in CentOS 6.5
   pkg_list = %w(centos-release-SCL ruby193 ruby193-ruby-devel make gcc gcc-c++ openssl-devel)
