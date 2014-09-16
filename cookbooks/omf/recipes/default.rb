@@ -35,7 +35,7 @@ when "fedora"
     value "$PATH:/usr/local/bin"
   end
   pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
-  if node["platform_version"] < 17
+  if node["platform_version"].to_i < 17
   else
     o_url = "http://download.opensuse.org/repositories/home:cdwertmann:oml/Fedora_#{node["platform_version"]}/home:cdwertmann:oml.repo"
   end
