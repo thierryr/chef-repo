@@ -35,14 +35,10 @@ when "fedora"
     value "$PATH:/usr/local/bin"
   end
   pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
-  if node["platform_version"].to_i < 17
-  else
-    o_url = "http://download.opensuse.org/repositories/home:cdwertmann:oml/Fedora_#{node["platform_version"]}/home:cdwertmann:oml.repo"
-  end
 
   yum_repository 'oml' do
     desciption "OML packages"
-    baseurl o_url
+    baseurl "http://download.opensuse.org/repositories/home:cdwertmann:oml/Fedora_#{node["platform_version"]}/"
     gpgcheck false
     action :create
   end
@@ -55,7 +51,7 @@ pkg_list << "oml2-apps"
 
 pkg_list.each do |p|
   package p do
-    action :upgrade
+    action :install
   end
 end
 
@@ -81,5 +77,5 @@ end
 
 service "omf_rc" do
   provider Chef::Provider::Service::Upstart if platform?("ubuntu")
-  action [:stop, :start, :enable]
+  action [:stop, :start]
 end
