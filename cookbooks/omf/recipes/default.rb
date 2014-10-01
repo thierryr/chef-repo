@@ -36,9 +36,15 @@ when "fedora"
   end
   pkg_list = %w(ruby ruby-devel make gcc gpp gcc-c++ openssl-devel)
 
+  unless node["platform_version"].to_i < 17
+    o_url = "http://download.opensuse.org/repositories/home:cdwertmann:oml/Fedora_#{node["platform_version"]}/"
+  else
+    oml2_not_found = true
+  end
+
   yum_repository 'oml' do
-    desciption "OML packages"
-    baseurl "http://download.opensuse.org/repositories/home:cdwertmann:oml/Fedora_#{node["platform_version"]}/"
+    description "OML packages"
+    baseurl o_url
     gpgcheck false
     action :create
   end
@@ -47,7 +53,7 @@ when "rhel"
   pkg_list = %w(centos-release-SCL ruby193 ruby193-ruby-devel make gcc gcc-c++ openssl-devel)
 end
 
-pkg_list << "oml2-apps"
+pkg_list << "oml2-apps" unless oml2_not_found
 
 pkg_list.each do |p|
   package p do
