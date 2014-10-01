@@ -42,11 +42,13 @@ when "fedora"
     oml2_not_found = true
   end
 
-  yum_repository 'oml' do
-    description "OML packages"
-    baseurl o_url
-    gpgcheck false
-    action :create
+  unless oml2_not_found
+    yum_repository 'oml' do
+      description "OML packages"
+      baseurl o_url
+      gpgcheck false
+      action :create
+    end
   end
 when "rhel"
   # FIXME Failed in CentOS 6.5
