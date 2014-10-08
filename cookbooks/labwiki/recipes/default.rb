@@ -42,15 +42,37 @@ when "debian"
 
   # PG
   pkg_list += ["postgresql"]
-end
 
-# Install LabWiki
-directory "/var/lib/labwiki/labwiki" do
-  recursive true
+  # Essential tools
+  pkg_list += ["git", "curl"]
 end
 
 pkg_list.each do |p|
   package p do
     action :install
   end
+end
+
+# Install LabWiki
+user "labwiki" do
+  system true
+  home "/var/lib/labwiki"
+end
+
+directory "/var/lib/labwiki" do
+  recursive true
+  owner "labwiki"
+  group "labwiki"
+end
+
+git "/var/lib/labwiki/labwiki" do
+  repository "https://github.com/mytestbed/labwiki.git"
+  user "labwiki"
+  group "labwiki"
+end
+
+git "/var/lib/labwiki/omf_job_service" do
+  repository "https://github.com/mytestbed/omf_job_service.git"
+  user "labwiki"
+  group "labwiki"
 end
