@@ -1,8 +1,8 @@
 environment: production
 
 communication:
-  url: <%= ENV["FRCP"] && !ENV["FRCP"].empty? ? ENV["FRCP"] : "amqp://srv.mytestbed.net" %>
+  url: <%= node["omf"]["frcp"] %>
 
-  resources:
-  - type: node
-    uid: <%= Socket.gethostname %>
+resources:
+- type: node
+  uid: <%= node["omf"]["uid"] %>
