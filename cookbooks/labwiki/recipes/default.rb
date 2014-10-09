@@ -53,6 +53,14 @@ pkg_list.each do |p|
   end
 end
 
+gem_package "rake"
+gem_package "bundler"
+
+# Start OML Server
+service "oml2-server" do
+  action [:enable, :start]
+end
+
 # Install LabWiki
 user "labwiki" do
   system true
@@ -71,8 +79,12 @@ git "/var/lib/labwiki/labwiki" do
   group "labwiki"
 end
 
+# LW Plugins
+
+# Install Job Service
 git "/var/lib/labwiki/omf_job_service" do
   repository "https://github.com/mytestbed/omf_job_service.git"
   user "labwiki"
   group "labwiki"
 end
+
