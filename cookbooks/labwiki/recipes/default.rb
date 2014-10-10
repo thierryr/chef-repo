@@ -81,6 +81,12 @@ git "/var/lib/labwiki/labwiki" do
 end
 
 # LW Plugins
+directory "/var/lib/labwiki/labwiki/plugins" do
+  recursive true
+  owner "labwiki"
+  group "labwiki"
+end
+
 lw_plugins = ["labwiki_experiment_plugin", "labwiki_gimi_plugin", "labwiki_topology_plugin"]
 
 lw_plugins.each do |p|
