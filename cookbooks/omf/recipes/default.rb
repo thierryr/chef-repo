@@ -79,6 +79,10 @@ end
 
 directory "/etc/omf_rc"
 
+template "/etc/omf_rc/topology" do
+  source "topology"
+end
+
 template "/etc/omf_rc/config.yml" do
   source "config.yml"
 end

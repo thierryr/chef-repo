@@ -6,3 +6,22 @@ communication:
 resources:
 - type: node
   uid: <%= node["omf"]["uid"] %>
+
+instrument: true
+
+instrumentation:
+  domain: <%= node["omf"]["uid"] %>
+  omlCollectUri: <%= node["omf"]["oml_collect_uri"] %>
+
+# Customise resources which can be created by this RC
+factories:
+  load: [
+    'omf_rc/resource_proxy/node',
+    'omf_rc/resource_proxy/net',
+    'omf_rc/resource_proxy/application'
+  ]
+  # Set default value of resource property
+  defaults:
+    node:
+      topo_file: '/etc/omf/topology'
+      topo_check_timeout: <%= node["omf"]["topo_check_timeout"] %>
