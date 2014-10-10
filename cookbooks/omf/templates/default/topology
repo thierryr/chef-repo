@@ -1,0 +1,3 @@
+<% node['omf']['edges'].each do |v| %>
+<%= v %>
+<% end %>
