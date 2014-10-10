@@ -65,6 +65,7 @@ end
 user "labwiki" do
   system true
   home "/var/lib/labwiki"
+  shell "/bin/bash"
 end
 
 directory "/var/lib/labwiki" do
@@ -80,6 +81,15 @@ git "/var/lib/labwiki/labwiki" do
 end
 
 # LW Plugins
+lw_plugins = ["labwiki_experiment_plugin", "labwiki_gimi_plugin", "labwiki_topology_plugin"]
+
+lw_plugins.each do |p|
+  git "/var/lib/labwiki/labwiki/plugins/#{p}" do
+    repository "https://github.com/mytestbed/#{p}.git"
+    user "labwiki"
+    group "labwiki"
+  end
+end
 
 # Install Job Service
 git "/var/lib/labwiki/omf_job_service" do
@@ -88,3 +98,9 @@ git "/var/lib/labwiki/omf_job_service" do
   group "labwiki"
 end
 
+# Install Slice Service
+git "/var/lib/labwiki/omf_slice_service" do
+  repository "https://github.com/mytestbed/omf_slice_service.git"
+  user "labwiki"
+  group "labwiki"
+end
