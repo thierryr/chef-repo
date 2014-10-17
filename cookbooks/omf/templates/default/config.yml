@@ -26,5 +26,5 @@ factories:
   # Set default value of resource property
   defaults:
     node:
-      topo_file: '/etc/omf/topology'
-      topo_check_timeout: <%= node["omf"]["topo_check_timeout"] %>
+      #topo_file: '/etc/omf/topology'
+      #topo_check_timeout: <%= node["omf"]["topo_check_timeout"] %>
