@@ -2,7 +2,8 @@ default['omf']['frcp'] = ENV["FRCP"] && !ENV["FRCP"].empty? ? ENV["FRCP"] : "amq
 default['omf']['topo_check_timeout'] = 600
 a=('1'..'4').to_a
 b=('a'..'c').to_a
-default['omf']['uids'] = a.map { |i| b.map { |j| j+i } }.flatten
+c=".#{('a'..'z').to_a[rand(26)]}#{('a'..'z').to_a[rand(26)]}#{rand(100)}.tut"
+default['omf']['uids'] = a.map { |i| b.map { |j| j+i+c } }.flatten
 
 default['omf']['uid'] =
   begin

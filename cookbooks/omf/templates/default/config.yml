@@ -5,9 +5,9 @@ communication:
 
 # Starting up 12 Node Proxy in this RC
 resources:
-<% node["omf"]["uids"].each do |i| %>
+<% node["omf"]["uids"].each do |uid| %>
 - type: node
-  uid: <%= "#{i}#{node["omf"]["uid"]}" %>
+  uid: <%= uid %>
 <% end %>
 
 instrument: true
