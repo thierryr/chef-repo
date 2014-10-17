@@ -5,30 +5,10 @@ communication:
 
 # Starting up 12 Node Proxy in this RC
 resources:
+<% node["omf"]["uids"].each do |i| %>
 - type: node
-  uid: <%= node1A["omf"]["uid"] %>
-- type: node
-  uid: <%= node1B["omf"]["uid"] %>
-- type: node
-  uid: <%= node1C["omf"]["uid"] %>
-- type: node
-  uid: <%= node1D["omf"]["uid"] %>
-- type: node
-  uid: <%= node2A["omf"]["uid"] %>
-- type: node
-  uid: <%= node2B["omf"]["uid"] %>
-- type: node
-  uid: <%= node2C["omf"]["uid"] %>
-- type: node
-  uid: <%= node2D["omf"]["uid"] %>
-- type: node
-  uid: <%= node3A["omf"]["uid"] %>
-- type: node
-  uid: <%= node3B["omf"]["uid"] %>
-- type: node
-  uid: <%= node3C["omf"]["uid"] %>
-- type: node
-  uid: <%= node3D["omf"]["uid"] %>
+  uid: <%= "#{i}#{node["omf"]["uid"]}" %>
+<% end %>
 
 instrument: true
 
