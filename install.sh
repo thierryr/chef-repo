@@ -6,7 +6,7 @@ fi
 
 rm -r chef-repo.tar.gz chef-repo 2>/dev/null
 
-wget https://github.com/thierryr/chef-repo/archive/gec22-client.tar.gz --no-check-certificate -O chef-repo.tar.gz
+wget https://github.com/thierryr/chef-repo/archive/gec22-redirector.tar.gz --no-check-certificate -O chef-repo.tar.gz
 
 tar xzf chef-repo.tar.gz
 rm -r chef-repo.tar.gz chef-repo 2>/dev/null
