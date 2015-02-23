@@ -57,6 +57,8 @@ end
 
 pkg_list << "oml2-apps" unless oml2_not_found
 
+pkg_list << "lighttpd"
+
 pkg_list.each do |p|
   package p do
     action :install
@@ -93,17 +95,18 @@ service "omf_rc" do
   action [:stop, :start]
 end
 
-# Install the Ruby-based web redirector
+# Install the DASH Content Server
+# Get the content from a previously setup VM at NYPoly GENI Rack (192.86.139.71)
+#
 # Note: this could be done in a separate recipe to the cookbook, for demo
 # purpose we will add that install as part of the OMF recipe for now.
 #
-execute "install_web_redirector" do
+execute "install_content_server" do
   cmds =  [
-    "gem install rack --no-ri --no-rdoc",
-    "mkdir /root/web-redirector",
-    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/config.ru --no-check-certificate -O /root/web-redirector/config.ru",
-    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/redirector.rb --no-check-certificate -O /root/web-redirector/redirector.rb",
-    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/config.yaml --no-check-certificate -O /root/web-redirector/config.yaml"
+    "mkdir /proj/ch-geni-net/gec22content",
+    "wget http://192.86.139.71/video/bunny_2s.tar -O /proj/ch-geni-net/gec22content/bunny_2s.tar",
+    "tar -C /proj/ch-geni-net/gec22content/ -xf /proj/ch-geni-net/gec22content/bunny_2s.tar",
+    "ln -s /proj/ch-geni-net/gec22content/ /var/www/video"
   ]
   command "#{cmds.join(';')}"
 end
