@@ -10,11 +10,13 @@ resources:
   uid: <%= uid %>
 <% end %>
 
-instrument: true
-
-instrumentation:
-  domain: <%= node["omf"]["uid"] %>
-  omlCollectUri: <%= node["omf"]["oml_collect_uri"] %>
+# Turn OFF RC instrumentation
+# 
+#instrument: true
+#
+#instrumentation:
+#  domain: <%= node["omf"]["uid"] %>
+#  omlCollectUri: <%= node["omf"]["oml_collect_uri"] %>
 
 # Customise resources which can be created by this RC
 factories:
