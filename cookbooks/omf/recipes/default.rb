@@ -57,6 +57,8 @@ end
 
 pkg_list << "oml2-apps" unless oml2_not_found
 
+pkg_list << "vlc"
+
 pkg_list.each do |p|
   package p do
     action :install
