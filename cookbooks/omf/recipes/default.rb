@@ -57,8 +57,6 @@ end
 
 pkg_list << "oml2-apps" unless oml2_not_found
 
-pkg_list << "vlc"
-
 pkg_list.each do |p|
   package p do
     action :install
@@ -95,14 +93,17 @@ service "omf_rc" do
   action [:stop, :start]
 end
 
-# Install the OML-Instrumented VLC built for Ubuntu 12.04 x86_64
+# Install the Ruby-based web redirector
 # Note: this could be done in a separate recipe to the cookbook, for demo
 # purpose we will add that install as part of the OMF recipe for now.
 #
-execute "install_vlc_with_oml" do
+execute "install_web_redirector" do
   cmds =  [
-    "wget https://github.com/mytestbed/gec_demos_tutorial/raw/master/gec22_demo/vlc-oml-ubuntu-12.04.tgz --no-check-certificate -O /tmp/vlc-oml-ubuntu-12.04.tgz",
-    "tar -C /usr -xzf /tmp/vlc-oml-ubuntu-12.04.tgz"
+    "gem install rack --no-ri --no-rdoc",
+    "mkdir /root/web-redirector",
+    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/config.ru --no-check-certificate -O /root/web-redirector/config.ru",
+    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/redirector.rb --no-check-certificate -O /root/web-redirector/redirector.rb",
+    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/config.yaml --no-check-certificate -O /root/web-redirector/config.yaml"
   ]
   command "#{cmds.join(';')}"
 end

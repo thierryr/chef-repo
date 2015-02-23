@@ -10,7 +10,7 @@ wget https://github.com/thierryr/chef-repo/archive/gec22-client.tar.gz --no-chec
 
 tar xzf chef-repo.tar.gz
 rm -r chef-repo.tar.gz chef-repo 2>/dev/null
-mv chef-repo-gec22-client chef-repo
+mv chef-repo-gec22-redirector chef-repo
 
 cd chef-repo && FRCP=$1 chef-solo -c solo/solo.rb -j solo/solo.json && cd ..
 rm -rf chef-repo
