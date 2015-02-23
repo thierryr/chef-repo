@@ -60,6 +60,7 @@ pkg_list << "oml2-apps" unless oml2_not_found
 pkg_list.each do |p|
   package p do
     action :install
+    options "--force-yes"
   end
 end
 
@@ -90,4 +91,16 @@ end
 service "omf_rc" do
   provider Chef::Provider::Service::Upstart if platform?("ubuntu")
   action [:stop, :start]
+end
+
+# Install the OML-Instrumented VLC built for Ubuntu 12.04 x86_64
+# Note: this could be done in a separate recipe to the cookbook, for demo
+# purpose we will add that install as part of the OMF recipe for now.
+#
+execute "install_vlc_with_oml" do
+  cmds =  [
+    "wget https://github.com/mytestbed/gec_demos_tutorial/raw/master/gec22_demo/vlc-oml-ubuntu-12.04.tgz --no-check-certificate -O /tmp/vlc-oml-ubuntu-12.04.tgz",
+    "tar -C /usr -xzf /tmp/vlc-oml-ubuntu-12.04.tgz"
+  ]
+  command "#{cmds.join(';')}"
 end
