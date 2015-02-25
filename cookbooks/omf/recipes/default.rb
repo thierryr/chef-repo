@@ -106,7 +106,9 @@ execute "install_content_server" do
     "mkdir /proj/ch-geni-net/gec22content",
     "wget http://192.86.139.71/video/bunny_2s.tar -O /proj/ch-geni-net/gec22content/bunny_2s.tar",
     "tar -C /proj/ch-geni-net/gec22content/ -xf /proj/ch-geni-net/gec22content/bunny_2s.tar",
-    "ln -s /proj/ch-geni-net/gec22content/ /var/www/video"
+    "ln -s /proj/ch-geni-net/gec22content/ /var/www/video",
+    "chmod 775 /proj/ch-geni-net/",
+    "chmod 775 /proj/ch-geni-net/gec22content"
   ]
   command "#{cmds.join(';')}"
 end
