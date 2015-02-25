@@ -103,7 +103,7 @@ execute "install_web_redirector" do
     "mkdir /root/web-redirector",
     "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/config.ru --no-check-certificate -O /root/web-redirector/config.ru",
     "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/redirector.rb --no-check-certificate -O /root/web-redirector/redirector.rb",
-    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/redirector --no-check-certificate -O /root/web-redirector/configure",
+    "wget https://raw.githubusercontent.com/mytestbed/gec_demos_tutorial/master/gec22_demo/web_redirector/configure --no-check-certificate -O /root/web-redirector/configure",
     "chmod 755 /root/web-redirector/configure"
   ]
   command "#{cmds.join(';')}"
